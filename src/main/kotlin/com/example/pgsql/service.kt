@@ -26,7 +26,7 @@ class UserService(private val userRepository: UserRepository) {
             throw Exception("User not found")
         }
     }
-    fun searchUsersByName(name: String): List<User> {  //for searching user endpoint
+    fun searchUsersByName(name: String): List<User> {  //for searching user  by name
         return userRepository.findByNameContainingIgnoreCase(name)
     }
 }

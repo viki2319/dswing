@@ -9,18 +9,20 @@ import org.springframework.web.bind.annotation.RestController
 
 data class User1(val id: Long, val name: String, val email: String)
 
+@CrossOrigin(origins = ["http://localhost:3000"])
 @RestController
 @RequestMapping("/api/users")
 class UserController(private val userService: UserService) {
     private val logger: Logger = LoggerFactory.getLogger(UserController::class.java)
 
-    @GetMapping("/search") // for searching user endpoint
-    fun searchUsers(@RequestParam name: String): List<User> {
+    @GetMapping("/name/{name}") // Matches URL path parameter
+    fun searchUsers(@PathVariable name: String): List<User> {
         logger.info("Searching for users with name containing: $name")
         return userService.searchUsersByName(name)
     }
 
-        @GetMapping
+
+    @GetMapping
         fun getAllUsers(): List<User> {
             // Example: Simulate throwing an exception if there is a problem
             // throw InternalServerErrorException("Internal server error occurred while fetching users.")
