@@ -17,7 +17,4 @@ data class User(
     val address: String? = null,
     val phoneNumber: String? = null
 )
-class ResourceNotFoundException(message: String) : RuntimeException(message)
-class BadRequestException(message: String) : RuntimeException(message)
-class InternalServerErrorException(message: String) : RuntimeException(message)
-class ConflictException(message: String) : RuntimeException(message)
+

@@ -1,13 +1,18 @@
 package com.example.pgsql
 
+import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
+import org.springframework.web.bind.annotation.ControllerAdvice
+import org.springframework.web.bind.annotation.ExceptionHandler
+import org.springframework.web.bind.annotation.ResponseStatus
+
 
 @Service
 class UserService(private val userRepository: UserRepository) {
 
     fun getAllUsers(): List<User> = userRepository.findAll()
 
-    fun getUserById(userId: Long): User? = userRepository.findById(userId).orElse(null)
+    fun getUserById(userId: Long): User? = userRepository.findById(userId).orElseThrow { ResourceNotFoundException("User not found") }
 
     fun createUser(user: User): User = userRepository.save(user)
 
@@ -29,4 +34,7 @@ class UserService(private val userRepository: UserRepository) {
     fun searchUsersByName(name: String): List<User> {  //for searching user  by name
         return userRepository.findByNameContainingIgnoreCase(name)
     }
+
+
+
 }
