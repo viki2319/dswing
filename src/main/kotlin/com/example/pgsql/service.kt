@@ -12,7 +12,8 @@ class UserService(private val userRepository: UserRepository) {
 
     fun getAllUsers(): List<User> = userRepository.findAll()
 
-    fun getUserById(userId: Long): User? = userRepository.findById(userId).orElseThrow { ResourceNotFoundException("User not found") }
+    fun getUserById(userId: Long): User? = userRepository.findById(userId).orElseThrow {
+        ResourceNotFoundException("User not found") }
 
     fun createUser(user: User): User = userRepository.save(user)
 
